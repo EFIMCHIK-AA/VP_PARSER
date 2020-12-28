@@ -28,6 +28,7 @@ namespace WindowsFormsApp1.Services
             };
         }
 
+        public Authorization() { }
 
         public async Task<Boolean> Login()
         {
@@ -48,7 +49,11 @@ namespace WindowsFormsApp1.Services
         {
             try
             {
-                await VK.Api.LogOutAsync();
+                if(VK.Api != null)
+                {
+                    await VK.Api.LogOutAsync();
+                }
+
                 return true;
             }
             catch (Exception ex)

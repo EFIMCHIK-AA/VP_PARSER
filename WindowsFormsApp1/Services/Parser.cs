@@ -1,9 +1,13 @@
-﻿using System;
+﻿using Microsoft.Extensions.Logging;
+using NLog;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using VkNet.Enums.Filters;
 using VkNet.Model;
 using VkNet.Model.RequestParams;
@@ -14,12 +18,16 @@ namespace WindowsFormsApp1.Services
 {
     public class Parser
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         private int count = 1000;
         private long countMembers;
 
         private Boolean userFilterAge = false;
         int startRange;
         int endRange;
+
+        bool IsWork = false;
 
         private List<String> phonesMale = new List<string>(); //Мужской 
         private List<String> phonesFemale = new List<string>(); // Женский
@@ -31,30 +39,58 @@ namespace WindowsFormsApp1.Services
             endRange = EndRange;
         }
 
-        public ExportLists StartParse(List<String> groups)
+        public async Task<ExportLists> StartParse(List<String> groups)
         {
             for(int g = 0; g < groups.Count; g++)
             {
-                VkCollection<User> members = VK.Api.Groups.GetMembers(new GroupsGetMembersParams() { GroupId = groups[g], Fields = UsersFields.All });
-                GetPhones(members);
-                countMembers = (long)members.TotalCount;
-
-                if (countMembers > 1000)
+                if(IsContainsGroupByName(groups[g], groups.GetRange(0,g)))
                 {
-                    long i = 999;
-
-                    while (true)
-                    {
-                        GetPhones(VK.Api.Groups.GetMembers(new GroupsGetMembersParams() { GroupId = groups[g], Fields = UsersFields.All, Count = count, Offset = i }));
-
-                        if ((i + count) > countMembers)
-                        {
-                            break;
-                        }
-
-                        i += count;
-                    }
+                    LogViewer.WriteLog($"Группа {groups[g]} уже проходила обработку");
+                    continue;
                 }
+
+                VkCollection<User> members = null;
+
+                try
+                {
+                    members = await VK.Api.Groups.GetMembersAsync(new GroupsGetMembersParams() { GroupId = groups[g], Fields = UsersFields.All });
+                }
+                catch (VkNet.Exception.GroupAccessDeniedException gex)
+                {
+                    LogViewer.WriteLog($"Группа {groups[g]} в доступе к группе отказано");
+                    logger.Info(gex, $"Группа {groups[g]} в доступе к группе отказано");
+                }
+                catch (VkNet.Exception.InvalidGroupIdException ex)
+                {
+                    LogViewer.WriteLog($"Группа {groups[g]} не найдена");
+                    logger.Info(ex, $"Группа {groups[g]} не найдена");
+                }
+
+                if (members != null)
+                {
+                    GetPhones(members);
+                    countMembers = (long)members.TotalCount;
+
+                    if (countMembers > 1000)
+                    {
+                        long i = 999;
+
+                        IsWork = true;
+
+                        while (IsWork)
+                        {
+                            GetPhones(await VK.Api.Groups.GetMembersAsync(new GroupsGetMembersParams() { GroupId = groups[g], Fields = UsersFields.All, Count = count, Offset = i }));
+
+                            if ((i + count) > countMembers)
+                            {
+                                IsWork = false;
+                                break;
+                            }
+
+                            i += count;
+                        }
+                    }
+                }       
             }
 
             return new ExportLists
@@ -74,6 +110,19 @@ namespace WindowsFormsApp1.Services
             }
 
             return null;
+        }
+
+        private bool IsContainsGroupByName(String groupName, List<String> groups)
+        {
+            for (int g = 0; g < groups.Count; g++)
+            {
+                if(groups[g] == groupName)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private string RemoveNonNumeric(string phone)
@@ -144,6 +193,73 @@ namespace WindowsFormsApp1.Services
                     Target.Add(phone);
                 }
             }
+        }
+
+        public void ExportData()
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.RestoreDirectory = true;
+            sfd.Filter = "Текстовый файл(*.txt)|*.txt";
+            sfd.FilterIndex = 0;
+            sfd.FileName = $"export{DateTime.Now.GetHashCode()}";
+            sfd.SupportMultiDottedExtensions = false;
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                using (StreamWriter sw = new StreamWriter(File.Open(sfd.FileName, FileMode.Create)))
+                {
+                    for (int i = 0; i < phonesMale.Count; i++)
+                    {
+                        sw.WriteLine(phonesMale[i]);
+                    }
+
+                    for (int i = 0; i < phonesFemale.Count; i++)
+                    {
+                        sw.WriteLine(phonesFemale[i]);
+                    }
+
+                }
+
+                LogViewer.WriteLog("Номера вместе успешно экспортированы");
+            }
+        }
+
+        public void ExportSplitData()
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.RestoreDirectory = true;
+            sfd.Filter = "Текстовый файл(*.txt)|*.txt";
+            sfd.FilterIndex = 0;
+            sfd.FileName = $"export{DateTime.Now.GetHashCode()}";
+            sfd.SupportMultiDottedExtensions = false;
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                String path = sfd.FileName.Substring(0, sfd.FileName.Length - 4);
+
+                using (StreamWriter sw = new StreamWriter(File.Open(path + "(Муж).txt", FileMode.Create)))
+                {
+                    for (int i = 0; i < phonesMale.Count; i++)
+                    {
+                        sw.WriteLine(phonesMale[i]);
+                    }
+                }
+
+                using (StreamWriter sw = new StreamWriter(File.Open(path + "(Жен).txt", FileMode.Create)))
+                {
+                    for (int i = 0; i < phonesFemale.Count; i++)
+                    {
+                        sw.WriteLine(phonesFemale[i]);
+                    }
+                }
+
+                LogViewer.WriteLog("Номера раздельно успешно экспортированы");
+            }
+        }
+
+        public void StopWork()
+        {
+            IsWork = false;
         }
     }
 }
