@@ -10,7 +10,17 @@ namespace WindowsFormsApp1.Models
     {
         public List<String> phonesMale; //Мужской 
         public List<String> phonesFemale; // Женский
-        public List<String> phonesUnknown; // Не указан
-        public List<String> phonesDeactivated; // Деактивирован
+
+        public int GetMaxCount()
+        {
+            int temp = phonesMale.Count;
+
+            if(temp < phonesFemale.Count)
+            {
+                temp = phonesFemale.Count;
+            }
+
+            return temp;
+        }
     }
 }

@@ -34,20 +34,42 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.Data_DGV = new System.Windows.Forms.DataGridView();
+            this.Groups_DGV = new System.Windows.Forms.DataGridView();
+            this.NameGroup = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+            this.StartRange_P = new System.Windows.Forms.Panel();
+            this.StartRangeAge_TB = new System.Windows.Forms.TextBox();
+            this.EndRange_P = new System.Windows.Forms.Panel();
+            this.EndRangeAge_TB = new System.Windows.Forms.TextBox();
+            this.Start_B = new System.Windows.Forms.Button();
+            this.EndRange_L = new System.Windows.Forms.Label();
+            this.StartRange_L = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.UserAgeFilter_CB = new System.Windows.Forms.CheckBox();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.Description_L = new System.Windows.Forms.Label();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.UserName_B = new System.Windows.Forms.Button();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.Male = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Female = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Unknown = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Deactivated = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ModuleName_L = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Log_B = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Data_DGV)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Groups_DGV)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel8.SuspendLayout();
+            this.StartRange_P.SuspendLayout();
+            this.EndRange_P.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // Data_DGV
@@ -66,6 +88,7 @@
             this.Data_DGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.Data_DGV.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.Data_DGV.BackgroundColor = System.Drawing.Color.White;
+            this.Data_DGV.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Data_DGV.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
@@ -80,9 +103,7 @@
             this.Data_DGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Data_DGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Male,
-            this.Female,
-            this.Unknown,
-            this.Deactivated});
+            this.Female});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Verdana", 11F);
@@ -92,7 +113,8 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))));
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.Data_DGV.DefaultCellStyle = dataGridViewCellStyle3;
-            this.Data_DGV.Location = new System.Drawing.Point(248, 40);
+            this.Data_DGV.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Data_DGV.Location = new System.Drawing.Point(3, 55);
             this.Data_DGV.Margin = new System.Windows.Forms.Padding(1);
             this.Data_DGV.MultiSelect = false;
             this.Data_DGV.Name = "Data_DGV";
@@ -100,63 +122,12 @@
             this.Data_DGV.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.Data_DGV.RowHeadersVisible = false;
             this.Data_DGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.Data_DGV.Size = new System.Drawing.Size(650, 390);
+            this.Data_DGV.Size = new System.Drawing.Size(620, 491);
             this.Data_DGV.TabIndex = 15;
             // 
-            // Male
+            // Groups_DGV
             // 
-            this.Male.HeaderText = "Мужской";
-            this.Male.Name = "Male";
-            this.Male.ReadOnly = true;
-            // 
-            // Female
-            // 
-            this.Female.HeaderText = "Женский";
-            this.Female.Name = "Female";
-            this.Female.ReadOnly = true;
-            // 
-            // Unknown
-            // 
-            this.Unknown.HeaderText = "Не указан";
-            this.Unknown.Name = "Unknown";
-            this.Unknown.ReadOnly = true;
-            // 
-            // Deactivated
-            // 
-            this.Deactivated.HeaderText = "Деактивирован";
-            this.Deactivated.Name = "Deactivated";
-            this.Deactivated.ReadOnly = true;
-            // 
-            // ModuleName_L
-            // 
-            this.ModuleName_L.AutoSize = true;
-            this.ModuleName_L.BackColor = System.Drawing.Color.Transparent;
-            this.ModuleName_L.Font = new System.Drawing.Font("Verdana", 14F);
-            this.ModuleName_L.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))));
-            this.ModuleName_L.Location = new System.Drawing.Point(244, 9);
-            this.ModuleName_L.Name = "ModuleName_L";
-            this.ModuleName_L.Size = new System.Drawing.Size(210, 23);
-            this.ModuleName_L.TabIndex = 16;
-            this.ModuleName_L.Text = "Полученных номера";
-            this.ModuleName_L.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Verdana", 14F);
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))));
-            this.label2.Location = new System.Drawing.Point(10, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(83, 23);
-            this.label2.TabIndex = 18;
-            this.label2.Text = "Группы";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.Groups_DGV.AllowUserToDeleteRows = false;
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Verdana", 11F);
@@ -165,11 +136,12 @@
             dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(247)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))));
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.Groups_DGV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.Groups_DGV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.Groups_DGV.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.Groups_DGV.BackgroundColor = System.Drawing.Color.White;
+            this.Groups_DGV.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.Groups_DGV.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Verdana", 12F);
@@ -179,10 +151,10 @@
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(247)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))));
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1});
+            this.Groups_DGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            this.Groups_DGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.Groups_DGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.NameGroup});
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle6.Font = new System.Drawing.Font("Verdana", 11F);
@@ -191,123 +163,444 @@
             dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(247)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))));
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle6;
-            this.dataGridView1.Location = new System.Drawing.Point(14, 40);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(1);
-            this.dataGridView1.MultiSelect = false;
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(232, 390);
-            this.dataGridView1.TabIndex = 17;
+            this.Groups_DGV.DefaultCellStyle = dataGridViewCellStyle6;
+            this.Groups_DGV.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Groups_DGV.Location = new System.Drawing.Point(2, 53);
+            this.Groups_DGV.Margin = new System.Windows.Forms.Padding(1);
+            this.Groups_DGV.MultiSelect = false;
+            this.Groups_DGV.Name = "Groups_DGV";
+            this.Groups_DGV.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.Groups_DGV.RowHeadersVisible = false;
+            this.Groups_DGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.Groups_DGV.Size = new System.Drawing.Size(415, 453);
+            this.Groups_DGV.TabIndex = 17;
             // 
-            // dataGridViewTextBoxColumn1
+            // NameGroup
             // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Наименование";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.NameGroup.HeaderText = "Наименование";
+            this.NameGroup.Name = "NameGroup";
             // 
-            // Log_B
+            // tableLayoutPanel1
             // 
-            this.Log_B.BackColor = System.Drawing.Color.White;
-            this.Log_B.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Log_B.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.Log_B.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(217)))));
-            this.Log_B.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(247)))), ((int)(((byte)(255)))));
-            this.Log_B.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(247)))), ((int)(((byte)(255)))));
-            this.Log_B.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Log_B.Font = new System.Drawing.Font("Verdana", 10F);
-            this.Log_B.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(92)))), ((int)(((byte)(161)))));
-            this.Log_B.Location = new System.Drawing.Point(14, 470);
-            this.Log_B.Margin = new System.Windows.Forms.Padding(5, 0, 2, 5);
-            this.Log_B.Name = "Log_B";
-            this.Log_B.Size = new System.Drawing.Size(884, 36);
-            this.Log_B.TabIndex = 20;
-            this.Log_B.Text = "Экспортировать";
-            this.Log_B.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.Log_B.UseVisualStyleBackColor = false;
+            this.tableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(239)))), ((int)(((byte)(241)))));
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel8, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel4, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 2);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1060, 653);
+            this.tableLayoutPanel1.TabIndex = 23;
+            // 
+            // tableLayoutPanel8
+            // 
+            this.tableLayoutPanel8.BackColor = System.Drawing.Color.White;
+            this.tableLayoutPanel8.ColumnCount = 8;
+            this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutPanel8, 2);
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel8.Controls.Add(this.StartRange_P, 3, 0);
+            this.tableLayoutPanel8.Controls.Add(this.EndRange_P, 5, 0);
+            this.tableLayoutPanel8.Controls.Add(this.Start_B, 7, 0);
+            this.tableLayoutPanel8.Controls.Add(this.EndRange_L, 4, 0);
+            this.tableLayoutPanel8.Controls.Add(this.StartRange_L, 2, 0);
+            this.tableLayoutPanel8.Controls.Add(this.label4, 0, 0);
+            this.tableLayoutPanel8.Controls.Add(this.UserAgeFilter_CB, 1, 0);
+            this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(0, 55);
+            this.tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
+            this.tableLayoutPanel8.RowCount = 1;
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 41F));
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(1060, 41);
+            this.tableLayoutPanel8.TabIndex = 13;
+            // 
+            // StartRange_P
+            // 
+            this.StartRange_P.BackColor = System.Drawing.Color.White;
+            this.StartRange_P.Controls.Add(this.StartRangeAge_TB);
+            this.StartRange_P.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StartRange_P.Location = new System.Drawing.Point(345, 5);
+            this.StartRange_P.Margin = new System.Windows.Forms.Padding(5);
+            this.StartRange_P.Name = "StartRange_P";
+            this.StartRange_P.Size = new System.Drawing.Size(140, 31);
+            this.StartRange_P.TabIndex = 23;
+            this.StartRange_P.Visible = false;
+            this.StartRange_P.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint_1);
+            // 
+            // StartRangeAge_TB
+            // 
+            this.StartRangeAge_TB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.StartRangeAge_TB.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.StartRangeAge_TB.Font = new System.Drawing.Font("Verdana", 11F);
+            this.StartRangeAge_TB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))));
+            this.StartRangeAge_TB.Location = new System.Drawing.Point(4, 7);
+            this.StartRangeAge_TB.Name = "StartRangeAge_TB";
+            this.StartRangeAge_TB.Size = new System.Drawing.Size(131, 18);
+            this.StartRangeAge_TB.TabIndex = 0;
+            // 
+            // EndRange_P
+            // 
+            this.EndRange_P.BackColor = System.Drawing.Color.White;
+            this.EndRange_P.Controls.Add(this.EndRangeAge_TB);
+            this.EndRange_P.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.EndRange_P.Location = new System.Drawing.Point(567, 5);
+            this.EndRange_P.Margin = new System.Windows.Forms.Padding(5);
+            this.EndRange_P.Name = "EndRange_P";
+            this.EndRange_P.Size = new System.Drawing.Size(140, 31);
+            this.EndRange_P.TabIndex = 7;
+            this.EndRange_P.Visible = false;
+            this.EndRange_P.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // EndRangeAge_TB
+            // 
+            this.EndRangeAge_TB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.EndRangeAge_TB.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.EndRangeAge_TB.Font = new System.Drawing.Font("Verdana", 11F);
+            this.EndRangeAge_TB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))));
+            this.EndRangeAge_TB.Location = new System.Drawing.Point(4, 8);
+            this.EndRangeAge_TB.Name = "EndRangeAge_TB";
+            this.EndRangeAge_TB.Size = new System.Drawing.Size(131, 18);
+            this.EndRangeAge_TB.TabIndex = 0;
+            // 
+            // Start_B
+            // 
+            this.Start_B.BackColor = System.Drawing.Color.White;
+            this.Start_B.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Start_B.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.Start_B.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Start_B.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(217)))));
+            this.Start_B.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(247)))), ((int)(((byte)(255)))));
+            this.Start_B.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(247)))), ((int)(((byte)(255)))));
+            this.Start_B.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Start_B.Font = new System.Drawing.Font("Verdana", 10F);
+            this.Start_B.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(92)))), ((int)(((byte)(161)))));
+            this.Start_B.Location = new System.Drawing.Point(865, 5);
+            this.Start_B.Margin = new System.Windows.Forms.Padding(5);
+            this.Start_B.Name = "Start_B";
+            this.Start_B.Size = new System.Drawing.Size(190, 31);
+            this.Start_B.TabIndex = 22;
+            this.Start_B.Text = "Начать";
+            this.Start_B.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.Start_B.UseVisualStyleBackColor = false;
+            this.Start_B.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // EndRange_L
+            // 
+            this.EndRange_L.AutoSize = true;
+            this.EndRange_L.BackColor = System.Drawing.Color.Transparent;
+            this.EndRange_L.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.EndRange_L.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.EndRange_L.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))));
+            this.EndRange_L.Location = new System.Drawing.Point(490, 5);
+            this.EndRange_L.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.EndRange_L.Name = "EndRange_L";
+            this.EndRange_L.Size = new System.Drawing.Size(72, 31);
+            this.EndRange_L.TabIndex = 5;
+            this.EndRange_L.Text = "| Конец";
+            this.EndRange_L.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.EndRange_L.Visible = false;
+            // 
+            // StartRange_L
+            // 
+            this.StartRange_L.AutoSize = true;
+            this.StartRange_L.BackColor = System.Drawing.Color.Transparent;
+            this.StartRange_L.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.StartRange_L.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.StartRange_L.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))));
+            this.StartRange_L.Location = new System.Drawing.Point(257, 5);
+            this.StartRange_L.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
+            this.StartRange_L.Name = "StartRange_L";
+            this.StartRange_L.Size = new System.Drawing.Size(83, 31);
+            this.StartRange_L.TabIndex = 5;
+            this.StartRange_L.Text = "| Начало";
+            this.StartRange_L.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.StartRange_L.Visible = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label4.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))));
+            this.label4.Location = new System.Drawing.Point(3, 0);
+            this.label4.Name = "label4";
+            this.label4.Padding = new System.Windows.Forms.Padding(7);
+            this.label4.Size = new System.Drawing.Size(122, 41);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Настройки |";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // UserAgeFilter_CB
+            // 
+            this.UserAgeFilter_CB.AutoSize = true;
+            this.UserAgeFilter_CB.BackColor = System.Drawing.Color.White;
+            this.UserAgeFilter_CB.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.UserAgeFilter_CB.Font = new System.Drawing.Font("Verdana", 12F);
+            this.UserAgeFilter_CB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))));
+            this.UserAgeFilter_CB.Location = new System.Drawing.Point(128, 6);
+            this.UserAgeFilter_CB.Margin = new System.Windows.Forms.Padding(0, 6, 0, 5);
+            this.UserAgeFilter_CB.Name = "UserAgeFilter_CB";
+            this.UserAgeFilter_CB.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.UserAgeFilter_CB.Size = new System.Drawing.Size(129, 30);
+            this.UserAgeFilter_CB.TabIndex = 4;
+            this.UserAgeFilter_CB.Text = "По возрасту";
+            this.UserAgeFilter_CB.UseVisualStyleBackColor = false;
+            this.UserAgeFilter_CB.CheckedChanged += new System.EventHandler(this.UserAgeFilter_CB_CheckedChanged);
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.BackColor = System.Drawing.Color.White;
+            this.tableLayoutPanel4.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
+            this.tableLayoutPanel4.ColumnCount = 1;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Controls.Add(this.Description_L, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.Data_DGV, 0, 1);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(429, 101);
+            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(5);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 2;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(626, 549);
+            this.tableLayoutPanel4.TabIndex = 11;
+            // 
+            // Description_L
+            // 
+            this.Description_L.AutoSize = true;
+            this.Description_L.BackColor = System.Drawing.Color.Transparent;
+            this.Description_L.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Description_L.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Description_L.Font = new System.Drawing.Font("Verdana", 14F);
+            this.Description_L.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))));
+            this.Description_L.Location = new System.Drawing.Point(5, 2);
+            this.Description_L.Name = "Description_L";
+            this.Description_L.Size = new System.Drawing.Size(616, 50);
+            this.Description_L.TabIndex = 1;
+            this.Description_L.Text = "Полученные номера";
+            this.Description_L.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(217)))));
+            this.tableLayoutPanel3.ColumnCount = 4;
+            this.tableLayoutPanel1.SetColumnSpan(this.tableLayoutPanel3, 2);
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 55F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel3.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.pictureBox1, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.UserName_B, 3, 0);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(1060, 55);
+            this.tableLayoutPanel3.TabIndex = 9;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label1.Font = new System.Drawing.Font("Verdana", 19F);
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label1.Location = new System.Drawing.Point(55, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(163, 55);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "VK PARSER";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Padding = new System.Windows.Forms.Padding(5);
+            this.pictureBox1.Size = new System.Drawing.Size(55, 55);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            // 
+            // UserName_B
+            // 
+            this.UserName_B.AutoSize = true;
+            this.UserName_B.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.UserName_B.BackColor = System.Drawing.Color.White;
+            this.UserName_B.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.UserName_B.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.UserName_B.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))));
+            this.UserName_B.FlatAppearance.BorderSize = 0;
+            this.UserName_B.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(247)))), ((int)(((byte)(255)))));
+            this.UserName_B.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(247)))), ((int)(((byte)(255)))));
+            this.UserName_B.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.UserName_B.Font = new System.Drawing.Font("Verdana", 10F);
+            this.UserName_B.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))));
+            this.UserName_B.Location = new System.Drawing.Point(935, 12);
+            this.UserName_B.Margin = new System.Windows.Forms.Padding(12, 12, 5, 12);
+            this.UserName_B.MinimumSize = new System.Drawing.Size(120, 31);
+            this.UserName_B.Name = "UserName_B";
+            this.UserName_B.Size = new System.Drawing.Size(120, 31);
+            this.UserName_B.TabIndex = 4;
+            this.UserName_B.Text = "Выход";
+            this.UserName_B.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.UserName_B.UseVisualStyleBackColor = false;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.BackColor = System.Drawing.Color.White;
+            this.tableLayoutPanel2.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Controls.Add(this.button1, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.label3, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.Groups_DGV, 0, 1);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(5, 101);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(5, 5, 0, 5);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 3;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(419, 549);
+            this.tableLayoutPanel2.TabIndex = 10;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label3.Font = new System.Drawing.Font("Verdana", 14F);
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))));
+            this.label3.Location = new System.Drawing.Point(4, 1);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(411, 50);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Группы";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.White;
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(217)))));
             this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(247)))), ((int)(((byte)(255)))));
             this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(247)))), ((int)(((byte)(255)))));
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Verdana", 10F);
             this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(92)))), ((int)(((byte)(161)))));
-            this.button1.Location = new System.Drawing.Point(14, 531);
-            this.button1.Margin = new System.Windows.Forms.Padding(5, 0, 2, 5);
+            this.button1.Location = new System.Drawing.Point(4, 511);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(884, 36);
-            this.button1.TabIndex = 21;
-            this.button1.Text = "Выйти";
+            this.button1.Size = new System.Drawing.Size(411, 34);
+            this.button1.TabIndex = 23;
+            this.button1.Text = "Сохранить";
             this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button1.UseVisualStyleBackColor = false;
             // 
-            // button2
+            // Male
             // 
-            this.button2.BackColor = System.Drawing.Color.White;
-            this.button2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button2.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(217)))));
-            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(247)))), ((int)(((byte)(255)))));
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(247)))), ((int)(((byte)(255)))));
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Verdana", 10F);
-            this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(2)))), ((int)(((byte)(92)))), ((int)(((byte)(161)))));
-            this.button2.Location = new System.Drawing.Point(14, 432);
-            this.button2.Margin = new System.Windows.Forms.Padding(5, 0, 2, 5);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(884, 36);
-            this.button2.TabIndex = 22;
-            this.button2.Text = "Начать";
-            this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button2.UseVisualStyleBackColor = false;
+            this.Male.HeaderText = "Мужские";
+            this.Male.Name = "Male";
+            this.Male.ReadOnly = true;
+            // 
+            // Female
+            // 
+            this.Female.HeaderText = "Женские";
+            this.Female.Name = "Female";
+            this.Female.ReadOnly = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(911, 583);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.Log_B);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.ModuleName_L);
-            this.Controls.Add(this.Data_DGV);
+            this.ClientSize = new System.Drawing.Size(1060, 653);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ВКонтакте";
+            this.Text = "VK PARSER";
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Data_DGV)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Groups_DGV)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel8.ResumeLayout(false);
+            this.tableLayoutPanel8.PerformLayout();
+            this.StartRange_P.ResumeLayout(false);
+            this.StartRange_P.PerformLayout();
+            this.EndRange_P.ResumeLayout(false);
+            this.EndRange_P.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         public System.Windows.Forms.DataGridView Data_DGV;
+        public System.Windows.Forms.DataGridView Groups_DGV;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.Label Description_L;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        public System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NameGroup;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
+        public System.Windows.Forms.TextBox EndRangeAge_TB;
+        private System.Windows.Forms.Button Start_B;
+        public System.Windows.Forms.Label EndRange_L;
+        public System.Windows.Forms.Label StartRange_L;
+        public System.Windows.Forms.Label label4;
+        public System.Windows.Forms.CheckBox UserAgeFilter_CB;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        public System.Windows.Forms.Button UserName_B;
+        public System.Windows.Forms.TextBox StartRangeAge_TB;
+        private System.Windows.Forms.Button button1;
+        public System.Windows.Forms.Panel EndRange_P;
+        public System.Windows.Forms.Panel StartRange_P;
         private System.Windows.Forms.DataGridViewTextBoxColumn Male;
         private System.Windows.Forms.DataGridViewTextBoxColumn Female;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Unknown;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Deactivated;
-        public System.Windows.Forms.Label ModuleName_L;
-        public System.Windows.Forms.Label label2;
-        public System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.Button Log_B;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
     }
 }

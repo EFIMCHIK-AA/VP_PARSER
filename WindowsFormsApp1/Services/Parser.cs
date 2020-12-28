@@ -17,12 +17,21 @@ namespace WindowsFormsApp1.Services
         private int count = 1000;
         private long countMembers;
 
+        private Boolean userFilterAge = false;
+        int startRange;
+        int endRange;
+
         private List<String> phonesMale = new List<string>(); //Мужской 
         private List<String> phonesFemale = new List<string>(); // Женский
-        private List<String> phonesUnknown = new List<string>(); // Не указан
-        private List<String> phonesDeactivated = new List<string>(); // Деактивирован
 
-        public ExportLists StartSpam(List<String> groups)
+        public Parser(Boolean UserFilterAge, int StartRange, int EndRange)
+        {
+            userFilterAge = UserFilterAge;
+            startRange = StartRange;
+            endRange = EndRange;
+        }
+
+        public ExportLists StartParse(List<String> groups)
         {
             for(int g = 0; g < groups.Count; g++)
             {
@@ -50,10 +59,8 @@ namespace WindowsFormsApp1.Services
 
             return new ExportLists
             {
-                phonesDeactivated = phonesDeactivated,
                 phonesFemale = phonesFemale,
                 phonesMale = phonesMale,
-                phonesUnknown = phonesUnknown
             };
         }
 
@@ -78,23 +85,52 @@ namespace WindowsFormsApp1.Services
         {
             for (int i = 0; i < members.Count; i++)
             {
-                if (members[i].Sex == VkNet.Enums.Sex.Deactivated)
+                if (userFilterAge)
                 {
-                    GetValidatePhone(phonesDeactivated, members[i]);
+                    if (!ValidateAge(startRange, endRange, members[i]))
+                    {
+                        continue;
+                    }
                 }
-                else if (members[i].Sex == VkNet.Enums.Sex.Male)
+
+                if (members[i].Sex == VkNet.Enums.Sex.Male)
                 {
                     GetValidatePhone(phonesMale, members[i]);
                 }
-                else if(members[i].Sex == VkNet.Enums.Sex.Female)
+                else if (members[i].Sex == VkNet.Enums.Sex.Female)
                 {
                     GetValidatePhone(phonesFemale, members[i]);
                 }
-                else
+            }
+        }
+
+        private Boolean ValidateAge(int Start, int End, User user)
+        {
+            if(user.BirthdayVisibility == VkNet.Enums.BirthdayVisibility.Invisible || user.BirthdayVisibility == VkNet.Enums.BirthdayVisibility.OnlyDayAndMonth)
+            {
+                return false;
+            }
+
+            string[] tempAge = user.BirthDate.Split('.');
+
+            if (tempAge.Length == 3)
+            {
+                try
                 {
-                    GetValidatePhone(phonesUnknown, members[i]);
+                    int currAge = DateTime.Now.Year - Convert.ToInt32(tempAge[2]);
+
+                    if (currAge < Start || currAge > End)
+                    {
+                        return false;
+                    }
+                }
+                catch (Exception)
+                {
+                    return false;
                 }
             }
+
+            return true;
         }
 
         private void GetValidatePhone(List<String> Target, User user)

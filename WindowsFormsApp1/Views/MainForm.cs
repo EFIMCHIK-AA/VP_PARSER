@@ -13,6 +13,7 @@ using VkNet.Enums.Filters;
 using VkNet.Model;
 using VkNet.Model.RequestParams;
 using VkNet.Utils;
+using WindowsFormsApp1.Models;
 using WindowsFormsApp1.Services;
 
 namespace WindowsFormsApp1.Views
@@ -24,80 +25,54 @@ namespace WindowsFormsApp1.Views
             InitializeComponent();
         }
 
-        ulong countMan;
-        int count = 1000;
-        long countMembers;
+        private Color BorderColor = Color.FromArgb(0, 152, 217);
 
-        List<String> phones = new List<string>();
-
-        private void Start_B_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
-            ListNumbers_L.DataSource = null;
-            ListNumbers_L.Items.Clear();
+            Data_DGV.Rows.Clear();
 
-            String nameGroup = ID_Group_TB.Text.Trim();
+            List<String> groups = new List<string>();
 
-            VkCollection<User> members = VK.Api.Groups.GetMembers(new GroupsGetMembersParams() { GroupId = nameGroup, Fields = UsersFields.All });
-            GetPhones(members);
-            countMembers = (long)members.TotalCount;
-
-            if(countMembers > 1000)
+            for(int i = 0; i < Groups_DGV.Rows.Count; i++)
             {
-                long i = 999;
-
-                while (true)
+                if(Groups_DGV["NameGroup", i].Value != null && Groups_DGV["NameGroup", i].Value.ToString() != String.Empty)
                 {
-                    GetPhones(VK.Api.Groups.GetMembers(new GroupsGetMembersParams() { GroupId = nameGroup, Fields = UsersFields.All, Count = count, Offset = i }));
-
-                    if((i + count) > countMembers)
-                    {
-                        break;
-                    }
-
-                    i += count;
+                    groups.Add(Groups_DGV["NameGroup", i].Value.ToString());
                 }
             }
 
-            CountMale_TB.Text = (countMembers - (int)countMan).ToString();
-            CountFemale_TB.Text = countMan.ToString();
-            CountMembers_TB.Text = countMembers.ToString();
-            ListNumbers_L.DataSource = phones;
-        }
+            int start = 0;
+            int end = 0;
 
-        private String ValidateNumber(String number)
-        {
-            String cleaned = RemoveNonNumeric(number);
-
-            if (cleaned.Length == 11)
+            if (UserAgeFilter_CB.Checked)
             {
-                return cleaned;
+                start = Convert.ToInt32(StartRangeAge_TB.Text.Trim());
+                end = Convert.ToInt32(EndRangeAge_TB.Text.Trim());
             }
 
-            return null;
+            Parser parser = new Parser(UserAgeFilter_CB.Checked, start, end);
+            ExportLists lists = parser.StartParse(groups);
+
+            FillData(Data_DGV, lists);
         }
 
-        private string RemoveNonNumeric(string phone)
+        private void FillData(DataGridView dataGridView, ExportLists lists)
         {
-            return Regex.Replace(phone, @"[^0-9]+", "");
-        }
+            dataGridView.RowCount = lists.GetMaxCount() + 1;
 
-        private void GetPhones(VkCollection<User> members)
-        {
-            for (int i = 0; i < members.Count; i++)
+            dataGridView["Male", 0].Value = lists.phonesMale.Count.ToString() + "шт.";
+            dataGridView["Female", 0].Value = lists.phonesFemale.Count.ToString() + "шт.";
+
+            for (int i = 1; i < dataGridView.RowCount; i++)
             {
-                if (members[i].Sex == VkNet.Enums.Sex.Male)
+                if (i - 1 <= lists.phonesMale.Count - 1)
                 {
-                    countMan++;
+                    dataGridView["Male", i].Value = lists.phonesMale[i - 1];
                 }
 
-                if (members[i].HasMobile != null && (bool)members[i].HasMobile && !String.IsNullOrWhiteSpace(members[i].MobilePhone))
+                if (i - 1 <= lists.phonesFemale.Count - 1)
                 {
-                    String phone = ValidateNumber(members[i].MobilePhone.Trim());
-
-                    if (phone != null)
-                    {
-                        phones.Add(phone);
-                    }
+                    dataGridView["Female", i].Value = lists.phonesFemale[i - 1];
                 }
             }
         }
@@ -105,6 +80,29 @@ namespace WindowsFormsApp1.Views
         private void MainForm_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, EndRange_P.ClientRectangle, BorderColor, ButtonBorderStyle.Solid);
+        }
+
+        private void panel2_Paint_1(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, StartRange_P.ClientRectangle, BorderColor, ButtonBorderStyle.Solid);
+        }
+
+        private void UserAgeFilter_CB_CheckedChanged(object sender, EventArgs e)
+        {
+            StartRange_L.Visible = UserAgeFilter_CB.Checked;
+            StartRange_L.Enabled= UserAgeFilter_CB.Checked;
+            StartRange_P.Visible = UserAgeFilter_CB.Checked;
+            StartRange_P.Enabled = UserAgeFilter_CB.Checked;
+
+            EndRange_L.Visible = UserAgeFilter_CB.Checked;
+            EndRange_L.Enabled = UserAgeFilter_CB.Checked;
+            EndRange_P.Visible = UserAgeFilter_CB.Checked;
+            EndRange_P.Enabled = UserAgeFilter_CB.Checked;
         }
     }
 }
