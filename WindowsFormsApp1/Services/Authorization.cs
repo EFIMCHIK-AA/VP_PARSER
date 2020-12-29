@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VkNet;
@@ -9,6 +8,7 @@ using VkNet.Enums.Filters;
 using VkNet.Exception;
 using VkNet.Model;
 using VkNet.Utils.AntiCaptcha;
+using WindowsFormsApp1.Exceptions;
 using WindowsFormsApp1.Views;
 
 namespace WindowsFormsApp1.Services
@@ -17,14 +17,25 @@ namespace WindowsFormsApp1.Services
     {
         public Authorization(String login, String password)
         {
-            VK.Api = new VkApi();
+            VK.Api = new VkApi(null, new CaptchaSolver());
 
             VK.AuthParams = new ApiAuthParams
             {
                 Login = login,
                 Password = password,
                 ApplicationId = VK.AppId,
-                Settings = Settings.All
+                Settings = Settings.All,
+                TwoFactorAuthorization = () =>
+                {
+                    TwoFactorAuthorizationView two = new TwoFactorAuthorizationView();
+
+                    if (two.ShowDialog() == DialogResult.OK)
+                    {
+                        return two.Code_TB.Text.Trim();
+                    }
+
+                    throw new TwoFactorExceptions("TwoFactorException");
+                }
             };
         }
 
@@ -43,7 +54,7 @@ namespace WindowsFormsApp1.Services
                 return false;
             }
             catch (Exception ex)
-            {        
+            {
                 throw new Exception(ex.Message);
             }
         }
@@ -52,7 +63,7 @@ namespace WindowsFormsApp1.Services
         {
             try
             {
-                if(VK.Api != null)
+                if (VK.Api != null)
                 {
                     await VK.Api.LogOutAsync();
                 }

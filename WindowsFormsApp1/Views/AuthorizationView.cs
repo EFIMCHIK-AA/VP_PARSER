@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApp1.Exceptions;
 using WindowsFormsApp1.Services;
 
 namespace WindowsFormsApp1.Views
@@ -38,14 +39,25 @@ namespace WindowsFormsApp1.Views
                     AppManager.MainForm.MainForm.Show();
                     this.Close();
                 }
+
+                Login_B.Text = "Войти";
+                Login_B.Enabled = true;
             }
-            catch(Exception ex)
+            catch(VkNet.Exception.CaptchaNeededException ex)
+            {
+                logger.Error(ex.StackTrace);
+            }
+            catch (Exception ex)
             {
                 Login_B.Text = "Войти";
                 Login_B.Enabled = true;
                 logger.Error(ex.StackTrace);
-                MessageBox.Show(this, ex.Message, "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }       
+
+                if (ex.Message != "CaptchaExceptions" && ex.Message != "TwoFactorException")
+                {
+                    MessageBox.Show(this, ex.Message, "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
         }
 
         private async void Exit_B_Click(object sender, EventArgs e)

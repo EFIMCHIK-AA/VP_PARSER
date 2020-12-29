@@ -12,7 +12,7 @@ namespace WindowsFormsApp1.Services
     {
         private static VkApi _api;
         private static ApiAuthParams _authParam;
-        private static ulong _appId = 7708808;
+        private static ulong _appId = 7713872;
 
         public static VkApi Api
         {

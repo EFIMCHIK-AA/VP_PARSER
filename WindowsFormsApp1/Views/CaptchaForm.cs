@@ -17,9 +17,36 @@ namespace WindowsFormsApp1.Views
             InitializeComponent();
         }
 
+        private Color BorderColor = Color.FromArgb(0, 152, 217);
+
         private void Login_B_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void CaptchaForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CaptchaForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            
+        }
+
+        private void Captcha_PB_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, Captcha_PB.ClientRectangle, BorderColor, ButtonBorderStyle.Solid);
+        }
+
+        private void SearchPanel_P_Paint(object sender, PaintEventArgs e)
+        {
+            ControlPaint.DrawBorder(e.Graphics, SearchPanel_P.ClientRectangle, BorderColor, ButtonBorderStyle.Solid);
+        }
+
+        private void Cancel_B_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
