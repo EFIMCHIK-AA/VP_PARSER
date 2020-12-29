@@ -34,15 +34,18 @@ namespace WindowsFormsApp1.Services
         {
             try
             {
-                await VK.Api.AuthorizeAsync(VK.AuthParams);
-                return true;
+                if (VK.Api != null)
+                {
+                    await VK.Api.AuthorizeAsync(VK.AuthParams);
+                    return true;
+                }
+
+                return false;
             }
             catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+            {        
+                throw new Exception(ex.Message);
             }
-
-            return false;
         }
 
         public async Task<Boolean> Logout()
@@ -58,8 +61,7 @@ namespace WindowsFormsApp1.Services
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
-                return false;
+                throw new Exception(ex.Message);
             }
         }
     }

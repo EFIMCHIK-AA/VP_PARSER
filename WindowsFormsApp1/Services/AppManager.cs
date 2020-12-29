@@ -9,6 +9,6 @@ namespace WindowsFormsApp1.Services
 {
     public static class AppManager
     {
-        public static Form MainForm;
+        public static ApplicationContext MainForm;
     }
 }

@@ -80,6 +80,7 @@
     <Compile Include="Services\GroupsList.cs" />
     <Compile Include="Services\LogViewer.cs" />
     <Compile Include="Services\Parser.cs" />
+    <Compile Include="Services\PhonesViewer.cs" />
     <Compile Include="Services\VK.cs" />
     <Compile Include="Views\AuthorizationView.cs">
       <SubType>Form</SubType>

@@ -46,15 +46,19 @@ namespace WindowsFormsApp1.Views
 
                     IsWork = false;
 
-                    LogViewer.WriteLog("Остановка работы, пожалуйста подождите");
+                    LogViewer.WriteLog("Остановка работы, пожалуйста подождите...");
 
-                    Start_B.Text = "Начать";
+                    Start_B.Text = "Остановка...";
+                    Start_B.Enabled = false;
                     return;
                 }
 
                 LogViewer.Reset();
 
-                LogViewer.WriteLog("Проверка параметров");
+                LogViewer.WriteLog("Проверка параметров...");
+
+                PhonesViewer.Phones_viwer_control = Data_DGV;
+                PhonesViewer.ResetViewer();
 
                 Data_DGV.Rows.Clear();
 
@@ -62,14 +66,20 @@ namespace WindowsFormsApp1.Views
                 Export_B.Visible = false;
                 ExportSplit_B.Enabled = false;
                 ExportSplit_B.Visible = false;
+                Groups_DGV.ReadOnly = true;
+                Groups_DGV.AllowUserToDeleteRows = false;
+                UserAgeFilter_CB.Enabled = false;
+                StartRangeAge_TB.Enabled = false;
+                EndRangeAge_TB.Enabled = false;
+                UserName_B.Enabled = false;
 
                 List<String> groups = new List<string>();
 
                 for (int i = 0; i < Groups_DGV.Rows.Count; i++)
                 {
-                    if (Groups_DGV["NameGroup", i].Value != null && Groups_DGV["NameGroup", i].Value.ToString() != String.Empty)
+                    if (Groups_DGV["NameGroup", i].Value != null && Groups_DGV["NameGroup", i].Value.ToString().Trim() != String.Empty)
                     {
-                        groups.Add(Groups_DGV["NameGroup", i].Value.ToString());
+                        groups.Add(Groups_DGV["NameGroup", i].Value.ToString().Trim());
                     }
                 }
 
@@ -98,12 +108,15 @@ namespace WindowsFormsApp1.Views
 
                     validation.ValidationRange(start, end);
 
-                    LogViewer.WriteLog("Валидация возраста успешно");
+                    LogViewer.WriteLog("Валидация возраста успешно пройдена");
                 }
 
-                LogViewer.WriteLog("Проверка параметров успешно");
+                LogViewer.WriteLog("Проверка параметров успешно завешена");
 
                 LogViewer.WriteLog("Начало работы");
+                LogViewer.WriteLog("Запуск...");
+                LogViewer.WriteLog("В работе");
+
                 parser = new Parser(UserAgeFilter_CB.Checked, start, end);
 
                 IsWork = true;
@@ -129,9 +142,29 @@ namespace WindowsFormsApp1.Views
                 }
 
                 LogViewer.WriteLog("Работа завершена");
+
+                IsWork = false;
+                Start_B.Text = "Начать";
+                Start_B.Enabled = true;
+                Groups_DGV.ReadOnly = false;
+                Groups_DGV.AllowUserToDeleteRows = true;
+                UserAgeFilter_CB.Enabled = true;
+                StartRangeAge_TB.Enabled = true;
+                EndRangeAge_TB.Enabled = true;
+                UserName_B.Enabled = true;
             }
             catch (Exception ex)
             {
+                IsWork = false;
+                Start_B.Text = "Начать";
+                Start_B.Enabled = true;
+                Groups_DGV.ReadOnly = false;
+                Groups_DGV.AllowUserToDeleteRows = true;
+                UserAgeFilter_CB.Enabled = true;
+                StartRangeAge_TB.Enabled = true;
+                EndRangeAge_TB.Enabled = true;
+                UserName_B.Enabled = true;
+
                 logger.Error(ex.StackTrace);
                 MessageBox.Show(this, ex.Message, "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -167,6 +200,7 @@ namespace WindowsFormsApp1.Views
             ExportSplit_B.Visible = false;
 
             LogViewer.WriteLog("Добро пожаловать!");
+            label1.Text = $"VK_PARSER: {VK.AuthParams.Login}";
 
             try
             {
@@ -204,7 +238,7 @@ namespace WindowsFormsApp1.Views
         private async void UserName_B_Click(object sender, EventArgs e)
         {
             ExitService exitService = new ExitService();
-            await exitService.Exit();
+            await exitService.Logouot(this);
         }
 
         private void Export_B_Click(object sender, EventArgs e)
