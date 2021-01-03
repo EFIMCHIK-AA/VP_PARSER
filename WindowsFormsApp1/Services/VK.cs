@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using VkNet;
 using VkNet.Model;
 
-namespace WindowsFormsApp1.Services
+namespace VK_PARSER.Services
 {
     public static class VK
     {

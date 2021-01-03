@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VkNet.Utils.AntiCaptcha;
-using WindowsFormsApp1.Exceptions;
-using WindowsFormsApp1.Views;
+using VK_PARSER.Exceptions;
+using VK_PARSER.Views;
 
-namespace WindowsFormsApp1.Services
+namespace VK_PARSER.Services
 {
     class CaptchaSolver : ICaptchaSolver
     {

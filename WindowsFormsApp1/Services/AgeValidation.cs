@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WindowsFormsApp1.Services
+namespace VK_PARSER.Services
 {
     public class AgeValidation
     {

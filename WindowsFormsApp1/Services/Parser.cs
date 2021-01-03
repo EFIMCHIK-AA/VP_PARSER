@@ -12,9 +12,9 @@ using VkNet.Enums.Filters;
 using VkNet.Model;
 using VkNet.Model.RequestParams;
 using VkNet.Utils;
-using WindowsFormsApp1.Models;
+using VK_PARSER.Models;
 
-namespace WindowsFormsApp1.Services
+namespace VK_PARSER.Services
 {
     public class Parser
     {

@@ -5,9 +5,9 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WindowsFormsApp1.Views;
+using VK_PARSER.Views;
 
-namespace WindowsFormsApp1.Services
+namespace VK_PARSER.Services
 {
     public class ExitService
     {

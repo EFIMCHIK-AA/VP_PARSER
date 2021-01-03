@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp1.Views
+﻿namespace VK_PARSER.Views
 {
     partial class CaptchaForm
     {

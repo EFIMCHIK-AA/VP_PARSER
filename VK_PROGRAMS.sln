@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsApp1", "WindowsFormsApp1\WindowsFormsApp1.csproj", "{968B8AD9-DA01-4EFC-9CCA-F1025A3FD51B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VK_PARSER", "WindowsFormsApp1\VK_PARSER.csproj", "{968B8AD9-DA01-4EFC-9CCA-F1025A3FD51B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

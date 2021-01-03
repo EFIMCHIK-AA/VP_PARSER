@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp1.Extensions
+namespace VK_PARSER.Extensions
 {
     public static class WebExtension
     {

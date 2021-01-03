@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WindowsFormsApp1.Services;
-using WindowsFormsApp1.Views;
+using VK_PARSER.Services;
+using VK_PARSER.Views;
 
-namespace WindowsFormsApp1
+namespace VK_PARSER
 {
     static class Program
     {

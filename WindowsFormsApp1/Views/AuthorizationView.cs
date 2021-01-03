@@ -9,9 +9,9 @@ using System.Threading;
 using System.Windows.Forms;
 using VkNet.Model;
 using VkNet.Utils;
-using WindowsFormsApp1.Services;
+using VK_PARSER.Services;
 
-namespace WindowsFormsApp1.Views
+namespace VK_PARSER.Views
 {
     public partial class AuthorizationView : Form
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WindowsFormsApp1.Exceptions
+namespace VK_PARSER.Exceptions
 {
     public class CaptchaExceptions : Exception
     {

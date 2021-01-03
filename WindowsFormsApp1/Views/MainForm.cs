@@ -15,10 +15,10 @@ using VkNet.Enums.Filters;
 using VkNet.Model;
 using VkNet.Model.RequestParams;
 using VkNet.Utils;
-using WindowsFormsApp1.Models;
-using WindowsFormsApp1.Services;
+using VK_PARSER.Models;
+using VK_PARSER.Services;
 
-namespace WindowsFormsApp1.Views
+namespace VK_PARSER.Views
 {
     public partial class MainForm : Form
     {
@@ -114,7 +114,6 @@ namespace WindowsFormsApp1.Views
                 LogViewer.WriteLog("Проверка параметров успешно завешена");
 
                 LogViewer.WriteLog("Запуск...");
-                LogViewer.WriteLog("Начало работы");
 
                 parser = new Parser(UserAgeFilter_CB.Checked, start, end);
 

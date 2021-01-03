@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsApp1.Views
+﻿namespace VK_PARSER.Views
 {
     partial class AuthorizationView
     {
@@ -72,7 +72,7 @@
             // Loader_PB
             // 
             this.Loader_PB.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Loader_PB.Image = global::WindowsFormsApp1.Properties.Resources.loader;
+            this.Loader_PB.Image = global::VK_PROGRAMS.Properties.Resources.loader;
             this.Loader_PB.Location = new System.Drawing.Point(9, 9);
             this.Loader_PB.Margin = new System.Windows.Forms.Padding(5);
             this.Loader_PB.Name = "Loader_PB";
@@ -101,8 +101,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(393, 468);
-            this.Controls.Add(this.Web_WB);
             this.Controls.Add(this.LoaderTable_TLP);
+            this.Controls.Add(this.Web_WB);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
