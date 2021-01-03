@@ -32,7 +32,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo512.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Flurl, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Flurl.3.0.1\lib\net461\Flurl.dll</HintPath>
+    </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.11.28.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.11.28\lib\Net45\HtmlAgilityPack.dll</HintPath>
     </Reference>
@@ -58,6 +64,9 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -74,6 +83,7 @@
   <ItemGroup>
     <Compile Include="Exceptions\CaptchaExceptions.cs" />
     <Compile Include="Exceptions\TwoFactorExceptions.cs" />
+    <Compile Include="Extensions\WebExtension.cs" />
     <Compile Include="Models\ExportLists.cs" />
     <Compile Include="Services\AgeValidation.cs" />
     <Compile Include="Services\AppManager.cs" />
@@ -105,12 +115,7 @@
     <Compile Include="Views\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\TwoFactorAuthorizationView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\TwoFactorAuthorizationView.Designer.cs">
-      <DependentUpon>TwoFactorAuthorizationView.cs</DependentUpon>
-    </Compile>
+    <None Include="Resources\loader.gif" />
     <EmbeddedResource Include="Views\AuthorizationView.resx">
       <DependentUpon>AuthorizationView.cs</DependentUpon>
     </EmbeddedResource>
@@ -122,6 +127,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Views\CaptchaForm.resx">
       <DependentUpon>CaptchaForm.cs</DependentUpon>
@@ -129,12 +135,10 @@
     <EmbeddedResource Include="Views\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <Content Include="logo512.ico" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="Views\TwoFactorAuthorizationView.resx">
-      <DependentUpon>TwoFactorAuthorizationView.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>

@@ -62,21 +62,22 @@ namespace WindowsFormsApp1.Services
                 catch (VkNet.Exception.CannotBlacklistYourselfException mex)
                 {
                     LogViewer.WriteLog($"Владелец группы {groups[g]} скрыл пользователей");
-                    logger.Info(mex, $"Владелец группы {groups[g]} скрыл пользователей");
+                    logger.Error(mex, $"Владелец группы {groups[g]} скрыл пользователей");
                 }
                 catch (VkNet.Exception.GroupAccessDeniedException gex)
                 {
                     LogViewer.WriteLog($"Группа {groups[g]} в доступе к группе отказано");
-                    logger.Info(gex, $"Группа {groups[g]} в доступе к группе отказано");
+                    logger.Error(gex, $"Группа {groups[g]} в доступе к группе отказано");
                 }
                 catch (VkNet.Exception.InvalidGroupIdException ex)
                 {
                     LogViewer.WriteLog($"Группа {groups[g]} не найдена");
-                    logger.Info(ex, $"Группа {groups[g]} не найдена");
+                    logger.Error(ex, $"Группа {groups[g]} не найдена");
                 }
                 catch (Exception exc)
                 {
-                    logger.Info(exc, $"ERROR_CRITICAL");
+                    LogViewer.WriteLog($"Ошибка при работе программы. Дополнительная информация указана в папке Logs");
+                    logger.Error(exc, $"ERROR_CRITICAL" + exc.StackTrace);
                 }
 
                 if (members != null && IsWork)
@@ -236,63 +237,81 @@ namespace WindowsFormsApp1.Services
 
         public void ExportData()
         {
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.RestoreDirectory = true;
-            sfd.Filter = "Текстовый файл(*.txt)|*.txt";
-            sfd.FilterIndex = 0;
-            sfd.FileName = $"export{DateTime.Now.GetHashCode()}";
-            sfd.SupportMultiDottedExtensions = false;
-
-            if (sfd.ShowDialog() == DialogResult.OK)
+            try
             {
-                using (StreamWriter sw = new StreamWriter(File.Open(sfd.FileName, FileMode.Create)))
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.RestoreDirectory = true;
+                sfd.Filter = "Текстовый файл(*.txt)|*.txt";
+                sfd.FilterIndex = 0;
+                sfd.FileName = $"export{DateTime.Now.GetHashCode()}";
+                sfd.SupportMultiDottedExtensions = false;
+
+                if (sfd.ShowDialog() == DialogResult.OK)
                 {
-                    for (int i = 0; i < phonesMale.Count; i++)
+                    using (StreamWriter sw = new StreamWriter(File.Open(sfd.FileName, FileMode.Create)))
                     {
-                        sw.WriteLine(phonesMale[i]);
+                        for (int i = 0; i < phonesMale.Count; i++)
+                        {
+                            sw.WriteLine(phonesMale[i]);
+                        }
+
+                        for (int i = 0; i < phonesFemale.Count; i++)
+                        {
+                            sw.WriteLine(phonesFemale[i]);
+                        }
+
                     }
 
-                    for (int i = 0; i < phonesFemale.Count; i++)
-                    {
-                        sw.WriteLine(phonesFemale[i]);
-                    }
-
+                    LogViewer.WriteLog("Номера вместе успешно экспортированы");
                 }
-
-                LogViewer.WriteLog("Номера вместе успешно экспортированы");
             }
+            catch(Exception ex)
+            {
+                logger.Error(ex.StackTrace);
+
+                LogViewer.WriteLog("Ошибка при экспорте номеров. Дополнительные сведения смотреть в Logs");
+            }       
         }
 
         public void ExportSplitData()
-        {
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.RestoreDirectory = true;
-            sfd.Filter = "Текстовый файл(*.txt)|*.txt";
-            sfd.FilterIndex = 0;
-            sfd.FileName = $"export{DateTime.Now.GetHashCode()}";
-            sfd.SupportMultiDottedExtensions = false;
-
-            if (sfd.ShowDialog() == DialogResult.OK)
+        {   
+            try
             {
-                String path = sfd.FileName.Substring(0, sfd.FileName.Length - 4);
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.RestoreDirectory = true;
+                sfd.Filter = "Текстовый файл(*.txt)|*.txt";
+                sfd.FilterIndex = 0;
+                sfd.FileName = $"export{DateTime.Now.GetHashCode()}";
+                sfd.SupportMultiDottedExtensions = false;
 
-                using (StreamWriter sw = new StreamWriter(File.Open(path + "_М.txt", FileMode.Create)))
+                if (sfd.ShowDialog() == DialogResult.OK)
                 {
-                    for (int i = 0; i < phonesMale.Count; i++)
-                    {
-                        sw.WriteLine(phonesMale[i]);
-                    }
-                }
+                    String path = sfd.FileName.Substring(0, sfd.FileName.Length - 4);
 
-                using (StreamWriter sw = new StreamWriter(File.Open(path + "_Ж.txt", FileMode.Create)))
-                {
-                    for (int i = 0; i < phonesFemale.Count; i++)
+                    using (StreamWriter sw = new StreamWriter(File.Open(path + "_М.txt", FileMode.Create)))
                     {
-                        sw.WriteLine(phonesFemale[i]);
+                        for (int i = 0; i < phonesMale.Count; i++)
+                        {
+                            sw.WriteLine(phonesMale[i]);
+                        }
                     }
-                }
 
-                LogViewer.WriteLog("Номера раздельно успешно экспортированы");
+                    using (StreamWriter sw = new StreamWriter(File.Open(path + "_Ж.txt", FileMode.Create)))
+                    {
+                        for (int i = 0; i < phonesFemale.Count; i++)
+                        {
+                            sw.WriteLine(phonesFemale[i]);
+                        }
+                    }
+
+                    LogViewer.WriteLog("Номера раздельно успешно экспортированы");
+                }
+            }
+            catch(Exception ex)
+            {
+                logger.Error(ex.StackTrace);
+
+                LogViewer.WriteLog("Ошибка при экспорте номеров. Дополнительные сведения смотреть в Logs");
             }
         }
 

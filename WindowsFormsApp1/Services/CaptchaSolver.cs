@@ -20,7 +20,7 @@ namespace WindowsFormsApp1.Services
         {
             CaptchaForm captchaForm = new CaptchaForm();
 
-            captchaForm.Captcha_PB.Load(url);
+            captchaForm.Captcha_PB.ImageLocation = url;
 
             if (captchaForm.ShowDialog() == DialogResult.OK)
             {

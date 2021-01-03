@@ -113,9 +113,8 @@ namespace WindowsFormsApp1.Views
 
                 LogViewer.WriteLog("Проверка параметров успешно завешена");
 
-                LogViewer.WriteLog("Начало работы");
                 LogViewer.WriteLog("Запуск...");
-                LogViewer.WriteLog("В работе");
+                LogViewer.WriteLog("Начало работы");
 
                 parser = new Parser(UserAgeFilter_CB.Checked, start, end);
 
@@ -165,7 +164,6 @@ namespace WindowsFormsApp1.Views
                 EndRangeAge_TB.Enabled = true;
                 UserName_B.Enabled = true;
 
-                logger.Error(ex.StackTrace);
                 MessageBox.Show(this, ex.Message, "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
@@ -200,7 +198,7 @@ namespace WindowsFormsApp1.Views
             ExportSplit_B.Visible = false;
 
             LogViewer.WriteLog("Добро пожаловать!");
-            label1.Text = $"VK_PARSER: {VK.AuthParams.Login}";
+            label1.Text = $"ID_USER: {VK.AuthParams.Login}";
 
             try
             {

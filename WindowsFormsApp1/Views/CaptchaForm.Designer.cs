@@ -28,14 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CaptchaForm));
             this.Captcha_PB = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.Cancel_B = new System.Windows.Forms.Button();
             this.Login_L = new System.Windows.Forms.Label();
             this.OK_B = new System.Windows.Forms.Button();
             this.Authorization_L = new System.Windows.Forms.Label();
             this.SearchPanel_P = new System.Windows.Forms.Panel();
             this.Answer_TB = new System.Windows.Forms.TextBox();
-            this.Cancel_B = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Captcha_PB)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SearchPanel_P.SuspendLayout();
@@ -84,6 +85,29 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(378, 297);
             this.tableLayoutPanel1.TabIndex = 8;
+            // 
+            // Cancel_B
+            // 
+            this.Cancel_B.BackColor = System.Drawing.Color.White;
+            this.tableLayoutPanel1.SetColumnSpan(this.Cancel_B, 2);
+            this.Cancel_B.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Cancel_B.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.Cancel_B.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Cancel_B.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(217)))));
+            this.Cancel_B.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(247)))), ((int)(((byte)(255)))));
+            this.Cancel_B.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(247)))), ((int)(((byte)(255)))));
+            this.Cancel_B.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Cancel_B.Font = new System.Drawing.Font("Verdana", 10F);
+            this.Cancel_B.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))));
+            this.Cancel_B.Location = new System.Drawing.Point(5, 255);
+            this.Cancel_B.Margin = new System.Windows.Forms.Padding(5, 0, 5, 5);
+            this.Cancel_B.Name = "Cancel_B";
+            this.Cancel_B.Size = new System.Drawing.Size(368, 36);
+            this.Cancel_B.TabIndex = 10;
+            this.Cancel_B.Text = "Отмена";
+            this.Cancel_B.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.Cancel_B.UseVisualStyleBackColor = false;
+            this.Cancel_B.Click += new System.EventHandler(this.Cancel_B_Click);
             // 
             // Login_L
             // 
@@ -164,29 +188,6 @@
             this.Answer_TB.Size = new System.Drawing.Size(351, 18);
             this.Answer_TB.TabIndex = 0;
             // 
-            // Cancel_B
-            // 
-            this.Cancel_B.BackColor = System.Drawing.Color.White;
-            this.tableLayoutPanel1.SetColumnSpan(this.Cancel_B, 2);
-            this.Cancel_B.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Cancel_B.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.Cancel_B.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Cancel_B.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(217)))));
-            this.Cancel_B.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(247)))), ((int)(((byte)(255)))));
-            this.Cancel_B.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(247)))), ((int)(((byte)(255)))));
-            this.Cancel_B.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Cancel_B.Font = new System.Drawing.Font("Verdana", 10F);
-            this.Cancel_B.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))));
-            this.Cancel_B.Location = new System.Drawing.Point(5, 255);
-            this.Cancel_B.Margin = new System.Windows.Forms.Padding(5, 0, 5, 5);
-            this.Cancel_B.Name = "Cancel_B";
-            this.Cancel_B.Size = new System.Drawing.Size(368, 36);
-            this.Cancel_B.TabIndex = 10;
-            this.Cancel_B.Text = "Отмена";
-            this.Cancel_B.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.Cancel_B.UseVisualStyleBackColor = false;
-            this.Cancel_B.Click += new System.EventHandler(this.Cancel_B_Click);
-            // 
             // CaptchaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -194,10 +195,10 @@
             this.ClientSize = new System.Drawing.Size(378, 297);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CaptchaForm";
-            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CAPTCHA";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CaptchaForm_FormClosing);

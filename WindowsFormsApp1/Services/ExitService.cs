@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -25,7 +26,9 @@ namespace WindowsFormsApp1.Services
             if (MessageBox.Show("Вы действительно хотите выйти из аккаунта?", "Внимание", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 Authorization authorization = new Authorization();
-                AppManager.MainForm.MainForm = new AuthorizationView();
+                AuthorizationView authorizationView = new AuthorizationView();
+                AppManager.MainForm.MainForm = authorizationView;
+
                 await authorization.Logout();
                 AppManager.MainForm.MainForm.Show();
                 owner.Close();

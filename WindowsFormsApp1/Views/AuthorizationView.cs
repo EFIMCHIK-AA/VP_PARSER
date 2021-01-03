@@ -1,14 +1,14 @@
-﻿using NLog;
+﻿using HtmlAgilityPack;
+using NLog;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
+using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
-using WindowsFormsApp1.Exceptions;
+using VkNet.Model;
+using VkNet.Utils;
 using WindowsFormsApp1.Services;
 
 namespace WindowsFormsApp1.Views
@@ -20,92 +20,85 @@ namespace WindowsFormsApp1.Views
             InitializeComponent();
         }
 
-        Authorization _authorization;
-        private Color BorderColor = Color.FromArgb(0, 152, 217);
+        [DllImport("wininet.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern bool InternetSetOption(IntPtr hInternet, int dwOption, IntPtr lpBuffer, int dwBufferLength);
 
-        private static Logger logger = LogManager.GetCurrentClassLogger();
-
-        private async void Login_B_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Login_B.Text = "Выполняется авторизация, пожалуйста подождите..";
-                Login_B.Enabled = false;
-                _authorization = new Authorization(Login_TB.Text.Trim(), Password_TB.Text.Trim());
-
-                if (await _authorization.Login())
-                {
-                    AppManager.MainForm.MainForm = new MainForm();
-                    AppManager.MainForm.MainForm.Show();
-                    this.Close();
-                }
-
-                Login_B.Text = "Войти";
-                Login_B.Enabled = true;
-            }
-            catch(VkNet.Exception.CaptchaNeededException ex)
-            {
-                logger.Error(ex.StackTrace);
-            }
-            catch (Exception ex)
-            {
-                Login_B.Text = "Войти";
-                Login_B.Enabled = true;
-                logger.Error(ex.StackTrace);
-
-                if (ex.Message != "CaptchaExceptions" && ex.Message != "TwoFactorException")
-                {
-                    MessageBox.Show(this, ex.Message, "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
-        }
-
-        private async void Exit_B_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ExitService exitService = new ExitService();
-                await exitService.Exit();
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex.StackTrace);
-                Application.Exit();
-            }
-        }
+        private Authorization _authorization;
 
         private void AuthorizationView_Load(object sender, EventArgs e)
         {
+            var ptr = Marshal.AllocHGlobal(4);
+            Marshal.WriteInt32(ptr, 3);
+            InternetSetOption(IntPtr.Zero, 81, ptr, 4);
+            Marshal.Release(ptr);
 
+            Web_WB.IsWebBrowserContextMenuEnabled = false;
+
+            var appName = System.IO.Path.GetFileName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+
+            Microsoft.Win32.Registry.SetValue(@"HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION", appName, 11000, Microsoft.Win32.RegistryValueKind.DWord);
+
+            Authorization.GetAuthorizationUrlParameters();
+            Web_WB.Navigate(Services.Authorization.GetAuthorizeUrl(), null, null, "User-Agent: CustomUserAgent");
         }
 
-        private void SearchPanel_P_Paint(object sender, PaintEventArgs e)
-        {
-            ControlPaint.DrawBorder(e.Graphics, SearchPanel_P.ClientRectangle, BorderColor, ButtonBorderStyle.Solid);
-        }
+        private async void Web_WB_Navigated(object sender, WebBrowserNavigatedEventArgs e)
+        {     
+            Extensions.WebExtension.SetSilent(Web_WB);
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-            ControlPaint.DrawBorder(e.Graphics, panel1.ClientRectangle, BorderColor, ButtonBorderStyle.Solid);
+            VkAuthorization2 result;
 
-        }
-
-        private void Logo_PB_Paint(object sender, PaintEventArgs e)
-        {
-            ControlPaint.DrawBorder(e.Graphics, Logo_PB.ClientRectangle, BorderColor, ButtonBorderStyle.Solid);
-        }
-
-        private void ShowPassword_CB_CheckedChanged(object sender, EventArgs e)
-        {
-            Password_TB.UseSystemPasswordChar = !ShowPassword_CB.Checked;
-        }
-
-        private void AuthorizationView_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
+            try
             {
-                Login_B.PerformClick();
-                e.SuppressKeyPress = true;
+                result = VkAuthorization2.From(e.Url.AbsoluteUri);
+            }
+            catch
+            {
+                return;
+            }
+
+            if(e.Url.AbsoluteUri == $"https://oauth.vk.com/blank.html#error=access_denied&error_reason=user_denied&error_description=User%20denied%20your%20request&state={Authorization.State}")
+            {
+                MessageBox.Show(this, "Ошибка при авторизации пользователя в приложении. Необходимо разрешить права для использования пророграммы. Работа приложения будет завершена", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                System.Windows.Forms.Application.Exit();
+                return;
+            }
+
+            if (!result.IsAuthorized)
+            {
+                return;
+            }
+
+            AuthorizationResult authorizationResult = new AuthorizationResult
+            {
+                AccessToken = result.AccessToken,
+                ExpiresIn = result.ExpiresIn,
+                UserId = result.UserId,
+                State = result.State
+            };
+
+            _authorization = new Authorization(authorizationResult, result.UserId.ToString());
+
+            if (await _authorization.Login())
+            {
+                AppManager.MainForm.MainForm = new MainForm();
+                AppManager.MainForm.MainForm.Show();
+                this.Hide();
+            }
+        }
+
+        private void Web_WB_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+        {
+            Web_WB.Visible = false;
+            LoaderTable_TLP.Visible = true;
+        }
+
+        private void Web_WB_ProgressChanged(object sender, WebBrowserProgressChangedEventArgs e)
+        {
+            if(e.CurrentProgress == e.MaximumProgress)
+            {
+                Web_WB.Visible = true;
+                LoaderTable_TLP.Visible = false;
             }
         }
     }
