@@ -97,7 +97,7 @@ namespace VK_PARSER.Services
 
                             if ((i + count) > countMembers)
                             {
-                                IsWork = false;
+                                LogViewer.WriteLog($"Группа : {groups[g]}. Обработано {countMembers} из {countMembers}");
                                 break;
                             }
 
@@ -112,11 +112,15 @@ namespace VK_PARSER.Services
                     }
                 }
 
+                LogViewer.WriteLog($"Группа : {groups[g]}. Обработка завершена.");
+
                 if (!IsWork)
                 {
                     break;
                 }
             }
+
+            IsWork = false;
 
             return new ExportLists
             {
